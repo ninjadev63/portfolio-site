@@ -8,5 +8,8 @@ module.exports = {
 
   extends: ['@nuxtjs', 'eslint-config-prettier'],
 
-  ignorePatterns: ['node_modules', '.nuxt', 'dist', 'sw.js']
+  ignorePatterns: ['node_modules', '.nuxt', 'dist', 'sw.js'],
+  rules: {
+    'no-console': 'off'
+  }
 }

@@ -1,15 +1,11 @@
 <template>
   <main>
-    <SectionHero />
+    <!-- <SectionHero /> -->
     <SmoothScroll>
-      <SectionSpace />
+      <!-- <SectionSpace /> -->
       <SectionItemLeft />
-      <SectionItemRight />
-      <SectionItemLeft />
-      <SectionItemRight />
-      <SectionItemLeft />
-      <SectionItemRight />
-      <SectionItemLeft />
+      <!-- <SectionItemRight /> -->
+      <SectionCarousel />
       <SectionSpace />
     </SmoothScroll>
     <CursorFollower />
@@ -17,20 +13,22 @@
 </template>
 
 <script>
-import SectionHero from './SectionHero'
+// import SectionHero from './SectionHero'
 import SectionSpace from './SectionSpace'
 import SectionItemLeft from './SectionItemLeft'
-import SectionItemRight from './SectionItemRight'
+// import SectionItemRight from './SectionItemRight'
+import SectionCarousel from './SectionCarousel'
 import SmoothScroll from '~/components/SmoothScroll'
 import CursorFollower from '~/components/CursorFollower'
 
 export default {
   components: {
-    SectionHero,
+    // SectionHero,
     SectionSpace,
     SectionItemLeft,
-    SectionItemRight,
+    // SectionItemRight,
     SmoothScroll,
+    SectionCarousel,
     CursorFollower
   },
 
@@ -59,7 +57,7 @@ export default {
 
   mounted() {
     this.locomotiveScrollInit()
-    this.setHeroAnimation()
+    // this.setHeroAnimation()
     this.setItemAnimation()
   },
 
@@ -75,7 +73,7 @@ export default {
         getDirection: true
       })
 
-      this.scroll.stop()
+      // this.scroll.stop()
     },
 
     setHeroAnimation() {
@@ -111,6 +109,16 @@ export default {
     },
 
     setItemAnimation() {
+      this.scroll.on('scroll', instance => {
+        if (Object.keys(instance.currentElements).includes('hey')) {
+          // const element = instance.currentElements.hey
+          console.log(instance.scroll.y)
+          instance.currentElements.hey.el.style.left = `${
+            (instance.scroll.y - 107) / 2 - 600
+          }px`
+        }
+      })
+
       this.scroll.on('call', (value, way, obj) => {
         if (value === 'itemAnimation') {
           if (way === 'enter') {
